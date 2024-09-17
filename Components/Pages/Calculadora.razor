@@ -1,0 +1,29 @@
+@page "/calculadora"
+@rendermode InteractiveServer
+
+<PageTitle>Calculadora</PageTitle>
+
+<h1>Calculadora</h1>
+
+<p>En este apartado hay una calculadora para operaciones.</p>
+
+<input type="number" @bind="numero1" placeholder="Número 1" />
+<input type="number" @bind="numero2" placeholder="Número 2" />
+
+<button @onclick="Sumar">Sumar</button>
+<button @onclick="Restar">Restar</button>
+<button @onclick="Multiplicar">Multiplicar</button>
+<button @onclick="Dividir">Dividir</button>
+
+<p>Resultado: @resultado</p>
+
+@code {
+    private double numero1;
+    private double numero2;
+    private double resultado;
+
+    private void Sumar() => resultado = numero1 + numero2;
+    private void Restar() => resultado = numero1 - numero2;
+    private void Multiplicar() => resultado = numero1 * numero2;
+    private void Dividir() => resultado = numero1 / numero2;
+}

@@ -1,0 +1,64 @@
+@page "/aprende_mas"
+@rendermode InteractiveServer
+
+<PageTitle>Aprende Más</PageTitle>
+
+@if(mostrarVideo){
+    <p>Se ve el video</p>
+
+    <div class="embed-responsive embed-responsive-16by9" style="max-width:900px;">
+    <iframe class="" style="width:100%; height:600px;"src="@urlVideo" allowfullscreen></iframe>
+</div>
+
+}
+
+<h1>Aprende Más</h1>
+
+<p>En este apartado encontraras contenido referente a Blazor WebAssembly.</p>
+
+<div class="row">
+
+    @foreach (var video in videos)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img @onclick="()=>verVideo(video)"src="https:///i.ytimg.com/vi/@video.Url/hqdefault.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Video 🎥</h5>
+                    <p class="card-text">@video.Titulo</p>
+                    <a href="https://www.youtube.com/watch?v=@video.Url" target="_blank"
+                    class="btn btn-primary">Click para ver</a>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+@code{
+
+    bool mostrarVideo = false;
+
+    String urlVideo = "";
+
+
+    class Video{
+        public string Titulo { get; set; } = "";
+        public string Url { get; set; } = "";
+    }    
+
+    void verVideo(Video video){
+        Console.WriteLine("Ver video");
+        mostrarVideo = true;
+        urlVideo = $"https://www.youtube.com/embed/{video.Url}?rel=0";
+        StateHasChanged();
+    }
+
+        List<Video> videos = new List<Video>{
+            new Video{Titulo = "Blazor Tutorial - Ep1, este video me gusta por la manera de explicar con dibujos ", Url = "cmFvIzQr1h4"},
+            new Video{Titulo = "Blazor Tutorial - Ep2, una explicacion muy detallada del funcionanmiento ", Url = "Xs2IeHvzHQc"},
+            new Video{Titulo = "Blazor Tutorial - Ep3, este me gusta por la explicacion del modelo de hosteo de Blazor ", Url = "gqwJ_g_vb7Y"},
+            new Video{Titulo = "Blazor Tutorial - Ep4, ya pasamos al mambo y con una explicacion detallada ", Url = "FP0u36gEIb8"},
+            new Video{Titulo = "Blazor Tutorial - Ep5, mas de lo mismo una muy buena explicacion ", Url = "bVG_f_K3f-U"},
+        };
+}
